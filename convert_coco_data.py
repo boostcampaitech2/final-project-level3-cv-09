@@ -32,8 +32,11 @@ def images_annotations_info(train_path):
         for image in tqdm.tqdm(glob.glob(os.path.join(train_path, category, "*.jpg"))):
             # Load each json file along with image
             file_name = os.path.join(category, os.path.basename(image)) #'바나나/A020112XX_00866.jpg'
-            with open(image.replace('.jpg','.json').replace(f'{category}',f'{category} json'),'r') as json_file:
-                json_label = json.load(json_file)
+            try: 
+                with open(image.replace('.jpg','.json').replace(f'{category}',f'{category} json'),'r') as json_file:
+                    json_label = json.load(json_file)
+            except:
+                continue
 
             # Open the image and (to be sure) we convert it to RGB
             image_open = Image.open(image).convert("RGB")
