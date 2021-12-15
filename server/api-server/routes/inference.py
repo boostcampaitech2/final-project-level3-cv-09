@@ -1,10 +1,26 @@
 from fastapi import APIRouter
-router = APIRouter(prefix='/inference')
+from model.schemas import RequestPrediction, ResponsePediction, ResponseFood
+from predict import predict
+from sqlalchemy.orm import Session
+from model import model
+# router = APIRouter(prefix='/inference')
 
-@router.post('/')
-def inference_request():
-    return {"predict":"yolov5"}
+# @router.post('/inference')
+# def requests_prediction(requests : RequestPrediction):
+#     img = requests.img
+#     date_time = requests.date_time
 
-@router.get('/foods')
-def get_food_list():
-    return 
+#     # start inference
+#     pre = predict.Prediction(img)
+#     outputs = pre.inference()
+
+#     # parsing & read from db
+#     for out in outputs:
+
+#         cls = out["class"]
+#         name = out["name"]
+#         bbox = out["bbox"]
+
+    
+#     return {"predict":"yolov5"}
+

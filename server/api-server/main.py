@@ -3,17 +3,19 @@ from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
 import uvicorn
 from routes import feedback, inference
-from models import models, schemas
+from model import model, schemas
 from database import SessionLocal, engine
+from sql_app import dao
+from model.schemas import RequestPrediction
+from predict import predict
+
 import csv
 
 
-models.Base.metadata.create_all(bind=engine)
+model.Base.metadata.create_all(bind=engine)
 
 def get_application() -> FastAPI:
     application = FastAPI()
-    application.include_router(feedback.router)
-    application.include_router(inference.router)
 
     return application
 
@@ -26,43 +28,55 @@ def get_db():
 
 app = get_application()
 
-@app.get("/hello")
-def hello():
-    return {
-        "message": "world!"
-    }
-    
+# inference api
+@app.post("/inference")
+def requests_prediction(requests : RequestPrediction, db: Session = Depends(get_db)):
+    img = requests.img
+    date_time = requests.date_time
+
+    # start inference
+    pre = predict.Prediction(img)
+    outputs = pre.inference()
+
+    # parsing & read from db
+    food_list = []
+    for out in outputs:
+        cls = out["class"]
+        name = out["name"]
+        bbox = out["bbox"]
+        food = dao.get_food(name, db)
+        response_food = schemas.ResponseFood(
+            **{
+                "name":food.name, 
+                "name_ko":food.name_ko, 
+                "serving_size":food.serving_size, 
+                "kcal":food.kcal, 
+                "tan":food.tan, 
+                "dan":food.dan,
+                "gi":food.gi, 
+                "na":food.na, 
+                "bbox":bbox
+            }
+        )
+        food_list.append(response_food)
+    print(type(food_list))
+    response_prediction = schemas.ResponsePediction(
+        **{
+            "date_time":date_time,
+            "food_list":food_list
+        }
+    )
+
+    return response_prediction
+
 @app.get("/foods", response_model=List[schemas.Food])
-def read_foods(skip: int=0, limit: int=100, db: Session = Depends(get_db)):
-    foods = db.query(models.Foods).offset(skip).limit(limit).all()
-    return foods
+def get_food_list(skip: int=0, limit: int=100, db: Session = Depends(get_db)):
+    food_list = dao.get_food_list(skip, limit, db)
+    return food_list
 
 @app.get("/init_db")
 def init_database(db: Session = Depends(get_db)):
-    print("start init Database")
-
-    with open('./nutrition.csv', 'r', newline='', encoding='utf8') as csv_file:
-        reader = csv.reader(csv_file)
-        
-        for i, line in enumerate(reader):
-            if i == 0:
-                continue
-            print(line)
-            ko_name, name, serving_size, kcal, tan, dan, gi, na = line
-            kcal = float(kcal[:-5])
-            tan = float(tan[:-1])
-            dan = float(dan[:-1])
-            gi = float(gi[:-1])
-            na = float(na[:-2])
-            
-            db_food = models.Foods(**{"name_ko":ko_name, "name":name, "serving_size":serving_size, "kcal":kcal, "tan":tan, "dan":dan, "gi":gi, "na":na})
-            print(db_food)
-
-            db.add(db_food)
-            
-            db.commit()
-            db.refresh(db_food)
-            # break
+    dao.init_db(db)
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)

@@ -1,6 +1,7 @@
 from sqlalchemy import Column, String, Float, Integer
 from database import Base
 
+
 class Foods(Base):
     __tablename__ = 'foods'
 
@@ -13,6 +14,8 @@ class Foods(Base):
     gi = Column(Float())
     na = Column(Float())
 
+# class Feedback(Base):
+#     pass
 
 
 
