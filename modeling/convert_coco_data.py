@@ -1,5 +1,5 @@
 import tqdm
-from create_annotations import *
+from modeling.create_annotations import *
 from PIL import Image
 import os
 import json
