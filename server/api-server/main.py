@@ -2,15 +2,11 @@ from typing import List
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
 import uvicorn
-from routes import feedback, inference
 from model import model, schemas
 from database import SessionLocal, engine
 from sql_app import dao
 from model.schemas import RequestPrediction
 from predict import predict
-
-import csv
-
 
 model.Base.metadata.create_all(bind=engine)
 
@@ -33,7 +29,7 @@ app = get_application()
 def requests_prediction(requests : RequestPrediction, db: Session = Depends(get_db)):
     img = requests.img
     date_time = requests.date_time
-
+    
     # start inference
     pre = predict.Prediction(img)
     outputs = pre.inference()
