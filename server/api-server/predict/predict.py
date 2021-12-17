@@ -4,6 +4,15 @@ from PIL import Image
 from io import BytesIO
 import base64
 
+def load_detection_model(model_path):
+    print("load model in package")
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+    model = torch.hub.load("ultralytics/yolov5", 'custom', path=model_path, force_reload=True)
+    
+    return model
+
+model = load_detection_model("best_v1.pt")
+
 class Prediction():
     def __init__(
         self,
@@ -20,11 +29,15 @@ class Prediction():
         print("input image size", self.img.size)
         self.img.save("images/temp.jpg")
 
-        self.model = self.load_model()
+        if model is None:
+            self.model = self.load_model()
+        else:
+            self.model = model
 
     def load_model(self):
         """[summary]
         """
+        print("load model in class")
         model = torch.hub.load("ultralytics/yolov5", 'custom', path=self.model_path, force_reload=True)
         return model
     
@@ -65,10 +78,8 @@ class Prediction():
         """[summary]
         """
         self.model.eval()
-        # print(dir(self.model))
         output = self.model(self.img)
 
         result = self.result_to_json(output)
-        # print(result)
         return result[0]
 
