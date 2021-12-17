@@ -5,6 +5,7 @@ class FoodBase(BaseModel):
     name : str
     name_ko : str
     serving_size: str
+    cls : int
     kcal : float
     tan : float
     dan : float
@@ -23,6 +24,10 @@ class RequestPrediction(BaseModel):
     img : str
     date_time : str
 
-class ResponsePediction(BaseModel):
+class ResponseDiet(BaseModel):
+    status:str
     date_time: str
-    food_list : List[ResponseFood]
+    food_list: List[ResponseFood]
+
+class ResponsePediction(BaseModel):
+    diet: ResponseDiet

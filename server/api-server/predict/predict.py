@@ -17,6 +17,9 @@ class Prediction():
 
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
         self.img = Image.open(BytesIO(base64.b64decode(img)))
+        print("input image size", self.img.size)
+        self.img.save("images/temp.jpg")
+
         self.model = self.load_model()
 
     def load_model(self):
