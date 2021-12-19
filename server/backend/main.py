@@ -109,7 +109,8 @@ def get_user_feedback_by_img_id(img_id: int, db: Session = Depends(get_db)):
 
 @app.post("/api/v1/feedback")
 def post_user_feedback(user_feedback:schemas.RequestUserFeedback ,db: Session = Depends(get_db)):
-    return service.post_user_feedback(user_feedback, db)
-    
+    service.post_user_feedback(user_feedback, db)
+    return "피드백 감사합니다"
+
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
