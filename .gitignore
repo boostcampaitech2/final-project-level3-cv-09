@@ -2,6 +2,7 @@
 *.ipynb
 .ipynb_checkpoints
 */.ipynb_checkpoints/*
+*.jpg
 
 # IPython
 profile_default/
