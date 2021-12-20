@@ -14,7 +14,6 @@ def draw_box(image, bbox, feedback=True):
 
     miny *= size[1]
     maxy *= size[1]
-
     fill = (0, 0, 255) if feedback else (255, 0, 0)
 
     draw = ImageDraw.Draw(image)
@@ -29,7 +28,7 @@ def init():
     for feedback in feedback_list:
         img = Image.open(os.path.join('../backend', feedback['img_path']))
         # st.write()
-        user_feedback_food = requests.get("http://localhost:8000/api/v1/feedback/2").json()
+        user_feedback_food = requests.get(f"http://localhost:8000/api/v1/feedback/{feedback['id']}").json()
 
         with st.expander(f"이미지 경로: {feedback['img_path']} \n 요청 시간: {feedback['date_time']}", expanded=False):
 

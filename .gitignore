@@ -4,6 +4,8 @@
 */.ipynb_checkpoints/*
 *.jpg
 
+*.jpg
+
 # IPython
 profile_default/
 ipython_config.py
