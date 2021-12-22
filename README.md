@@ -58,6 +58,17 @@
 ---
 
 ## 🔑 [모델 실험](https://wandb.ai/cv_09/yolov5?workspace=user-)
+| weights | size | fl_gamma | copy_paste | mix_up | f1-score | map@.5:.95 | epoch |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| best_52class_map_0.5_0.95_0.77405t |  | 0.0 | 0.7 | 0.7 | 0.444 | 0.308 | 30 |
+| kmg_m_gamma_1.5_mixup_0.2_17_eopchs | m | 1.5 | 0.0 | 0.2 | 0.4102 | 0.264 | 17 |
+| syc_m6_ | m | 1.5 | 0.5 | 0.0 | 0.413 | 0.271 | 19 |
+| yolov5m_defaults_38epochs | m | 0.0 | 0.0 | 0.0 | 0.431 | 0.295 | 38 |
+| yolov5m_defaults_19epochs | m | 0.0 | 0.0 | 0.0 | 0.397 | 0.302 | 19 |
+| syc_l6_ | l | 1.5 | 0.0 | 0.2 | 0.439 | 0.269 | 17 |
+| kjs_yolov5l_v1 | l | 1.5 | 0.5 | 0.0 | 0.414 | 0.251 | 10 |
+| yolov5l_kjy_14epoch | l | 0.0 | 0.0 | 0.0 | 0.392 | 0.245 | 14 |
+|  |  |  |  |  |  |  |  |
 ![image](https://user-images.githubusercontent.com/35412566/147063198-cc0835c7-b385-4323-b050-d7579985e69f.png)
 
 
