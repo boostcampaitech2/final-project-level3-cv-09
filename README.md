@@ -109,7 +109,8 @@ serve/
 #### 5. 결과
 
 ---
-![ezgif com-gif-maker](https://user-images.githubusercontent.com/51802825/147072143-0838c197-8ec6-4493-934e-a410d7e902a9.gif)
+
+![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/51802825/147072941-623a25d6-7214-43cf-9715-011c69b7eef1.gif)
 
 
 ## 🛒 Train Test Quickstart
