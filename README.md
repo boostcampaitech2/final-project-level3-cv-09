@@ -48,23 +48,52 @@
 | 곽민구_T2255| 데이터 버젼 관리(dvc), 모델링|
 | 김준섭_T2056| Custom metric, 모델링
 | 김진용_T2063| 데이터 가공, EDA |
-| 심용철_T2122| EDA수행, Hyperparameter tuning |
+| 심용철_T2122| EDA, Hyperparameter tuning, test dataset 수집 |
 | 최현진_T2234| PM, 백엔드 개발, 안드로이드 개발, 영양정보 데이터 크롤링|
+<br>
 
 ---
-## 데이터 가공 및 학습데이터 생성
+## 🛒 데이터 가공 및 학습데이터 생성
+
+```python
+# data_handling
+cd modeling/data_handling
+
+# 이미지 가로 세로 1/4씩 resize
+python resized_images.py --train_dir {train_dir} --save_dir {save_dir}
+
+# 음식명 한글, 영어 매칭
+python make_Korean_English_category_csv.py 
+
+# AI hub format을 coco format으로 변환
+python hub2coco.py 
+
+# coco format을 yolo format으로 변환
+python coco2yolo.py --datasets COCO --img_path {img_path} --label {cocoformat.json} --img_type ".jpg"
+```
+<br>
+
+---
+## 🔍 EDA 
+```python
+# check_confuse_class 
+# inference결과 헷갈리는 class 확인
+python check_confuse_class.py --threshold {float} --class_id {int} --label_path {labels_dir} --data_path {dataset_dir} --save_path {save_dir} --save_json_name {save_name} --yaml_path {yaml_file_dir}
+```
 <br>
 
 ---
 
-## 🔑 [모델 실험](https://wandb.ai/cv_09/yolov5?workspace=user-)
+## 🔑 [모델 결과](https://wandb.ai/cv_09/yolov5?workspace=user-)
 
-![image](https://user-images.githubusercontent.com/35412566/147063198-cc0835c7-b385-4323-b050-d7579985e69f.png)
+|![image](https://user-images.githubusercontent.com/35412566/147109464-9496e28f-dc4d-419a-807d-145f0dc7d2ca.png)| ![image](https://user-images.githubusercontent.com/35412566/147110369-16cf4951-af08-44ed-8afd-31249adb2fb9.png)|
+|:---: | :---:|
+<br>
 
-
----
 ## 🥐 프로젝트 구조
 ![image](https://user-images.githubusercontent.com/51802825/147062582-13f3d2c1-a563-4795-8636-d715cbe4be1f.png)
+
+<br>
 
 ---
 ## 📱 안드로이드 앱 개발
@@ -73,11 +102,11 @@
 <br>
 
 ---
-## 사용자 피드백 모니터링
+## 🎨 사용자 피드백 모니터링
 ![image](https://user-images.githubusercontent.com/35412566/147100722-3b12634b-fb56-441d-888d-c1cf430b5b73.png)
 
 ---
-## 배포
+## 🎁 배포
 backend image build & run container
 ```
 cd server/backend
@@ -85,7 +114,7 @@ docker build . -t <tag> # docker image build
 docker run 
 
 ```
-fronend image build & run contatiner
+frontend image build & run contatiner
 ```
 cd server/frontend
 docker build . -t <tag> docker image build
@@ -99,8 +128,20 @@ docker run
 
 ```
 modeling/
-├── 
-└── 
+├── data_handling
+|  |  annotation.csv
+|  |  food.names
+|  |  Format.py
+|  |  coco2yolo.py
+│  │  hub2coco_data.py
+│  │  create_annotations.py
+│  │  make_Korean_English_categroy_csv.py
+│  └─ resized_images.py
+├── eda
+│  │  check_confuse_class.py
+│  └─ make_total_label_count_csv.py
+└── model
+   └─ yolov5
 ```
 
 ```
@@ -145,6 +186,8 @@ server
 
 
 ## 🛒 Train Test Quickstart
-```
+```python
+
+
 ```
 - reference here `exmple/`
