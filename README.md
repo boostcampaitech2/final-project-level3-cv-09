@@ -69,6 +69,7 @@
 | kjs_yolov5l_v1 | l | 1.5 | 0.5 | 0.0 | 0.414 | 0.251 | 10 |
 | yolov5l_kjy_14epoch | l | 0.0 | 0.0 | 0.0 | 0.392 | 0.245 | 14 |
 |  |  |  |  |  |  |  |  |
+
 ![image](https://user-images.githubusercontent.com/35412566/147063198-cc0835c7-b385-4323-b050-d7579985e69f.png)
 
 
