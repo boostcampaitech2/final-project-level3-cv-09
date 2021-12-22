@@ -74,7 +74,7 @@
 ---
 ## 사용자 피드백 모니터링
 <br>
-![image](https://user-images.githubusercontent.com/51802825/147094428-5e33b3fe-6d10-4ed4-bae7-7de78a70daaf.png)
+![image](https://user-images.githubusercontent.com/35412566/147100722-3b12634b-fb56-441d-888d-c1cf430b5b73.png)
 
 ---
 ## 배포
