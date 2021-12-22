@@ -74,9 +74,23 @@
 ---
 ## 사용자 피드백 모니터링
 <br>
+![image](https://user-images.githubusercontent.com/51802825/147094428-5e33b3fe-6d10-4ed4-bae7-7de78a70daaf.png)
 
 ---
 ## 배포
+backend image build & run container
+```
+cd server/backend
+docker build . -t <tag> # docker image build
+docker run 
+
+```
+fronend image build & run contatiner
+```
+cd server/frontend
+docker build . -t <tag> docker image build
+docker run
+```
 <br>
 
 ---
