@@ -51,10 +51,7 @@
 | 심용철_T2122| EDA수행, Hyperparameter tuning |
 | 최현진_T2234| PM, 백엔드 개발, 안드로이드 개발, 영양정보 데이터 크롤링|
 
-# 🔨 수행 과정
 ---
-
-## 🔑
 ## 데이터 가공 및 학습데이터 생성
 <br>
 
@@ -75,11 +72,11 @@
 <br>
 
 ---
-## 🔑
+## 사용자 피드백 모니터링
 <br>
 
 ---
-## 🔑
+## 배포
 <br>
 
 ---
@@ -93,24 +90,43 @@ modeling/
 ```
 
 ```
-serve/
-├── 
-└── 
+server
+│  docker-compose.yml
+│
+├─backend
+│  │  best.pt
+│  │  database.py
+│  │  Dockerfile
+│  │  main.py
+│  │  nutrition.csv
+│  │  requirements.txt
+│  ├─dao
+│  │  │  dao.py
+│  │  └─ __init__.py
+│  ├─model
+│  │  │  model.py
+│  │  │  schemas.py
+│  │  │  service.py
+│  │  └─ __init__.py
+│  ├─predict
+│  │  │  predict.py
+│  │  └─ __init__.py
+│  ├─service
+│  │  │  service.py
+│  │  └─ __init__.py
+└─frontend
+        Dockerfile
+        main.py
+        requirements.txt
 ```
-
-
-
 <br>
-
-## 💎
-<br>![Uploading ezgif-6-fd31b57593.gif…]()
-
-
-#### 5. 결과
-
 ---
 
+## 실행 결과
+
 ![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/51802825/147072941-623a25d6-7214-43cf-9715-011c69b7eef1.gif)
+<br>
+---
 
 
 ## 🛒 Train Test Quickstart
