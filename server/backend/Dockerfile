@@ -11,7 +11,6 @@ RUN apt-get -y install libgl1-mesa-glx
 RUN apt-get -y install libglib2.0-0
 
 RUN python -m pip install --upgrade pip && \
-    # pip install pip==21.2.4 && \
     pip install -r requirements.txt
 
 EXPOSE 8000

@@ -9,10 +9,10 @@ services:
     ports:
       - 3306:3306
 
-  app:
+  backend:
     build:
-      context: ./api-server
-    container_name: api-server
+      context: ./backend/
+    container_name: foodlog-backend
     environment:
       DB_RUL: mysql+mysqldb://root:1234@db:3306/my_database?charset=utf8m4
     ports:
@@ -20,3 +20,13 @@ services:
     depends_on:
       - db
     restart: always
+  
+  frontend:
+    build:
+      context: ./frontend
+    container_name: foodlog-frontend
+    ports:
+      - 8501:8501
+    depends_on:
+      - backend
+    retstart: always
