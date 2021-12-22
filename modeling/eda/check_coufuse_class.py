@@ -49,7 +49,7 @@ def get_confuse_json(label_path) :
     print(f'json length : {len(json_data.keys())}')
     return json_data
 
-
+ 
 def edit_json(json_data, data_path) :
     img_list = list(json_data.keys())
     txt_path = glob.glob(os.path.join(data_path, '**', '*.txt'))
