@@ -187,10 +187,3 @@ server
 <br>
 ---
 
-
-## 🛒 Train Test Quickstart
-```python
-
-
-```
-- reference here `exmple/`
