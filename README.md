@@ -107,18 +107,21 @@ python check_confuse_class.py --threshold {float} --class_id {int} --label_path 
 
 ---
 ## 🎁 배포
+mysql run container
+```
+docker run --name mysql -e MYSQL_ROOT_PASSWORD=1234 -e MYSQL_DATABSE=food_db -d -p 3306:3306 mysql:5.7.12
+```
 backend image build & run container
 ```
 cd server/backend
 docker build . -t <tag> # docker image build
-docker run 
-
+docker run --name foodlog-backend --link mysql -d -p 8000:8000 -v /app/images:/home/backend/images foodlog-backend
 ```
 frontend image build & run contatiner
 ```
 cd server/frontend
 docker build . -t <tag> docker image build
-docker run
+docker run --name foodlog-frontend --link foodlog-backend -d -p 8502:8502 --volumes-from foodlog-backend foodlog-frontend
 ```
 <br>
 
